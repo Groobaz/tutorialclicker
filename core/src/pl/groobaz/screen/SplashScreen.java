@@ -12,7 +12,7 @@ public class SplashScreen extends AbstractScreen{
 	
 	public SplashScreen(final JavaDevMattClikerGame game) {
 		super(game);
-		init();
+		//init();
 		Timer.schedule(new Task() {
 			
 			@Override
@@ -22,8 +22,8 @@ public class SplashScreen extends AbstractScreen{
 		}, 1);
 	}
 
-	private void init() {
-		//TODO implement better assets loading when game grows
+	@Override
+	protected void init() {
 		splashImg = new Texture("badlogic.jpg");
 	}
 
