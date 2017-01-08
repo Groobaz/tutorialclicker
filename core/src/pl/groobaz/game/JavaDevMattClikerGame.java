@@ -25,6 +25,10 @@ public class JavaDevMattClikerGame extends Game {
 
 	public void addPoint() {
 		this.points++;
+		updateSavedScore();
+	}
+
+	private void updateSavedScore() {
 		prefs.putInteger(GAME_SCORE,points);
 		prefs.flush();
 	}
@@ -70,5 +74,11 @@ public class JavaDevMattClikerGame extends Game {
 
 	public void setPaused(boolean paused) {
 		this.paused = paused;
+	}
+
+	public void resetGameScore() {
+		// TODO Auto-generated method stub
+		points = 0;
+		updateSavedScore();
 	}
 }
