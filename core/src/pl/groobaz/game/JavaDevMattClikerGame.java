@@ -2,18 +2,21 @@ package pl.groobaz.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Preferences;
+
 
 import pl.groobaz.screen.SplashScreen;
 
 public class JavaDevMattClikerGame extends Game {
-	
+	public final static String GAME_PREFS = "pl.groobaz.game.prefs";
+	public final static String GAME_SCORE = "pl.groobaz.game.prefs.score";
 	public final static String GAME_NAME = "Tutorial Clicker";
 	public final static int WIDTH = 480;
 	public final static int HEIGHT = 700;
 	private boolean paused;
+	
+	private Preferences prefs;
+	
 	private int points; 
 	
 	public int getPoints() {
@@ -22,10 +25,13 @@ public class JavaDevMattClikerGame extends Game {
 
 	public void addPoint() {
 		this.points++;
+		prefs.putInteger(GAME_SCORE,points);
+		prefs.flush();
 	}
 
 	@Override
 	public void create () {
+		init();
 		this.setScreen(new SplashScreen(this));
 	}
 
@@ -49,6 +55,15 @@ public class JavaDevMattClikerGame extends Game {
 	 * Gettery i Settery
 	 * */
 	
+	private void init() {
+		prefs = Gdx.app.getPreferences(GAME_PREFS);
+		loadScore();
+	}
+
+	private void loadScore() {
+		points = prefs.getInteger(GAME_SCORE);
+	}
+
 	public boolean isPaused() {
 		return paused;
 	}
