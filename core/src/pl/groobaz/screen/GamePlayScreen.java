@@ -2,8 +2,10 @@ package pl.groobaz.screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
+import pl.groobaz.entities.FlyingObject;
 import pl.groobaz.entities.Player;
 import pl.groobaz.game.JavaDevMattClikerGame;
 import pl.groobaz.screen.ui.IClickCallback;
@@ -13,11 +15,12 @@ import pl.groobaz.screen.ui.ScoreLabel;
 
 public class GamePlayScreen extends AbstractScreen {
 
-	private Texture bgTexture;
+	private Image bgImg;
 	private Player player; 
 	private PlayerButton playerButton;
 	private ResetScoreButton resetScoreButton;
 	private ScoreLabel scoreLabel;
+	private FlyingObject flyingObject1;
 	
 	public GamePlayScreen(JavaDevMattClikerGame game) {
 		super(game);
@@ -25,11 +28,23 @@ public class GamePlayScreen extends AbstractScreen {
 
 	@Override
 	protected void init() {
-		bgTexture = new Texture("bg.png");
+		initBg();
 		initPlayer();
 		initPlayerButton();
 		initResetScoreButton();
 		initScoreLabel();
+		initFlyingObjects();
+	}
+
+	private void initFlyingObjects() {
+		flyingObject1 = new FlyingObject(FlyingObject.MONEY);
+		stage.addActor(flyingObject1);
+		flyingObject1.flyLikeHell();
+	}
+
+	private void initBg() {
+		bgImg = new Image(new Texture("bg.png"));
+		stage.addActor(bgImg);
 	}
 
 	private void initResetScoreButton() {
@@ -75,9 +90,6 @@ public class GamePlayScreen extends AbstractScreen {
 		super.render(delta);
 		update();
 		
-		spriteBatch.begin();
-		spriteBatch.draw(bgTexture, 0, 0);
-		spriteBatch.end();
 		
 		spriteBatch.begin();
 		stage.draw();
