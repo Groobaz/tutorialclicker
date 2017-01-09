@@ -1,7 +1,6 @@
 package pl.groobaz.screen;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 import pl.groobaz.entities.Player;
@@ -9,13 +8,14 @@ import pl.groobaz.game.JavaDevMattClikerGame;
 import pl.groobaz.screen.ui.IClickCallback;
 import pl.groobaz.screen.ui.PlayerButton;
 import pl.groobaz.screen.ui.ResetScoreButton;
+import pl.groobaz.screen.ui.ScoreLabel;
 
 public class GamePlayScreen extends AbstractScreen {
 
 	private Player player; 
 	private PlayerButton playerButton;
 	private ResetScoreButton resetScoreButton;
-	private Label scoreLabel;
+	private ScoreLabel scoreLabel;
 	
 	public GamePlayScreen(JavaDevMattClikerGame game) {
 		super(game);
@@ -44,9 +44,7 @@ public class GamePlayScreen extends AbstractScreen {
 	private void initScoreLabel() {
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = new BitmapFont();
-		scoreLabel = new Label("", labelStyle);
-		scoreLabel.setX(20);
-		scoreLabel.setY(650);
+		scoreLabel = new ScoreLabel();
 		stage.addActor(scoreLabel);
 	}
 

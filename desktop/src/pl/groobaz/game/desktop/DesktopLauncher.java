@@ -2,7 +2,6 @@ package pl.groobaz.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.sun.xml.internal.ws.assembler.dev.TubelineAssemblyContextUpdater;
 
 import pl.groobaz.game.JavaDevMattClikerGame;
 
