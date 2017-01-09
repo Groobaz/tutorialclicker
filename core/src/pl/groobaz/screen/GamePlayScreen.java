@@ -10,11 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import pl.groobaz.entities.Player;
 import pl.groobaz.game.JavaDevMattClikerGame;
+import pl.groobaz.screen.ui.IClickCallback;
+import pl.groobaz.screen.ui.PlayerButton;
 
 public class GamePlayScreen extends AbstractScreen {
 
 	private Player player; 
-	private Button playerButton, resetScoreButton;
+	private PlayerButton playerButton;
+	private Button resetScoreButton;
 	private Label scoreLabel;
 	
 	public GamePlayScreen(JavaDevMattClikerGame game) {
@@ -60,25 +63,17 @@ public class GamePlayScreen extends AbstractScreen {
 	}
 
 	private void initPlayerButton() {
-		playerButton = new Button(new ButtonStyle());//dzieki temu bêdzie przezroczysty
-		playerButton.setWidth(460);
-		playerButton.setHeight(360);
-		playerButton.setX(10);
-		playerButton.setY(170);
-		//tymczasowo ma byc widoczny , na czas projektu
-		playerButton.setDebug(true);
-		
-		stage.addActor(playerButton);
-		playerButton.addListener(new ClickListener(){
+		playerButton = new PlayerButton(new IClickCallback() {
 			
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+			public void onClick() {
+				// TODO Auto-generated method stub
 				player.reactOnClick();
 				game.addPoint();
-				return super.touchDown(event, x, y, pointer, button);
 			}
-			
 		});
+		stage.addActor(playerButton);
+	
 	}
 
 	private void initPlayer() {
