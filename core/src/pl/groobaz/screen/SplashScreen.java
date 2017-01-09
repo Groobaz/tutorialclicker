@@ -24,7 +24,7 @@ public class SplashScreen extends AbstractScreen{
 
 	@Override
 	protected void init() {
-		splashImg = new Texture("badlogic.jpg");
+		splashImg = new Texture("splash.png");
 	}
 
 	@Override

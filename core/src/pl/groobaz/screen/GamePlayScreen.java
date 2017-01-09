@@ -1,5 +1,6 @@
 package pl.groobaz.screen;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
@@ -12,6 +13,7 @@ import pl.groobaz.screen.ui.ScoreLabel;
 
 public class GamePlayScreen extends AbstractScreen {
 
+	private Texture bgTexture;
 	private Player player; 
 	private PlayerButton playerButton;
 	private ResetScoreButton resetScoreButton;
@@ -23,6 +25,7 @@ public class GamePlayScreen extends AbstractScreen {
 
 	@Override
 	protected void init() {
+		bgTexture = new Texture("bg.png");
 		initPlayer();
 		initPlayerButton();
 		initResetScoreButton();
@@ -72,11 +75,12 @@ public class GamePlayScreen extends AbstractScreen {
 		super.render(delta);
 		update();
 		
-		//System.out.println("Points: " + game.getPoints());
+		spriteBatch.begin();
+		spriteBatch.draw(bgTexture, 0, 0);
+		spriteBatch.end();
 		
 		spriteBatch.begin();
 		stage.draw();
-		
 		spriteBatch.end();
 	}
 
