@@ -1,23 +1,20 @@
 package pl.groobaz.screen;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import pl.groobaz.entities.Player;
 import pl.groobaz.game.JavaDevMattClikerGame;
 import pl.groobaz.screen.ui.IClickCallback;
 import pl.groobaz.screen.ui.PlayerButton;
+import pl.groobaz.screen.ui.ResetScoreButton;
 
 public class GamePlayScreen extends AbstractScreen {
 
 	private Player player; 
 	private PlayerButton playerButton;
-	private Button resetScoreButton;
+	private ResetScoreButton resetScoreButton;
 	private Label scoreLabel;
 	
 	public GamePlayScreen(JavaDevMattClikerGame game) {
@@ -33,24 +30,15 @@ public class GamePlayScreen extends AbstractScreen {
 	}
 
 	private void initResetScoreButton() {
-		resetScoreButton = new Button(new ButtonStyle());//dzieki temu bêdzie przezroczysty
-		resetScoreButton.setWidth(100);
-		resetScoreButton.setHeight(100);
-		resetScoreButton.setX(330);
-		resetScoreButton.setY(560);
-		resetScoreButton.setDebug(true);
-		
-		stage.addActor(resetScoreButton);
-		
-		resetScoreButton.addListener(new ClickListener(){
+		resetScoreButton = new ResetScoreButton(new IClickCallback() {
+			
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				
+			public void onClick() {
 				game.resetGameScore();
-				
-				return super.touchDown(event, x, y, pointer, button);
 			}
 		});
+		
+		stage.addActor(resetScoreButton);
 	}
 
 	private void initScoreLabel() {
