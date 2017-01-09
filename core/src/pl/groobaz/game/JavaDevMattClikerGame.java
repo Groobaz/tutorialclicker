@@ -89,6 +89,5 @@ public class JavaDevMattClikerGame extends Game {
 
 	public void addPassiveIncome() {
 		// To implement
-		System.out.println("Pasive income");
 	}
 }

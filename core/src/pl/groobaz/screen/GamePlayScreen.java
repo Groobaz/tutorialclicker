@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
+import pl.groobaz.controller.FlyingObjectController;
 import pl.groobaz.entities.FlyingObject;
 import pl.groobaz.entities.FlyingObject.FlyingObjectType;
 import pl.groobaz.entities.Player;
@@ -21,7 +22,8 @@ public class GamePlayScreen extends AbstractScreen {
 	private PlayerButton playerButton;
 	private ResetScoreButton resetScoreButton;
 	private ScoreLabel scoreLabel;
-	private FlyingObject flyingObject1;
+//	private FlyingObject flyingObject1;
+	private FlyingObjectController flyingStuffController; 
 	
 	public GamePlayScreen(JavaDevMattClikerGame game) {
 		super(game);
@@ -34,15 +36,19 @@ public class GamePlayScreen extends AbstractScreen {
 		initPlayerButton();
 		initResetScoreButton();
 		initScoreLabel();
-		initFlyingObjects();
+		initFlyingStuffObjects();
 	}
 
-	private void initFlyingObjects() {
+	private void initFlyingStuffObjects() {
+		flyingStuffController = new FlyingObjectController(game, stage);
+	}
+
+	/*private void initFlyingObjects() {
 		flyingObject1 = new FlyingObject(FlyingObjectType.MONEY, game);
 		stage.addActor(flyingObject1);
 		flyingObject1.flyLikeHell();
 	}
-
+*/
 	private void initBg() {
 		bgImg = new Image(new Texture("bg.png"));
 		stage.addActor(bgImg);
@@ -90,8 +96,6 @@ public class GamePlayScreen extends AbstractScreen {
 	public void render(float delta) {
 		super.render(delta);
 		update();
-		
-		
 		spriteBatch.begin();
 		stage.draw();
 		spriteBatch.end();
