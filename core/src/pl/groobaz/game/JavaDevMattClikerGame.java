@@ -27,6 +27,11 @@ public class JavaDevMattClikerGame extends Game {
 		this.points++;
 		updateSavedScore();
 	}
+	
+	public void addPoints(int pointsToAdd) {
+		this.points += pointsToAdd;
+		updateSavedScore();
+	}
 
 	private void updateSavedScore() {
 		prefs.putInteger(GAME_SCORE,points);
@@ -80,5 +85,10 @@ public class JavaDevMattClikerGame extends Game {
 		// TODO Auto-generated method stub
 		points = 0;
 		updateSavedScore();
+	}
+
+	public void addPassiveIncome() {
+		// To implement
+		System.out.println("Pasive income");
 	}
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 import pl.groobaz.entities.FlyingObject;
+import pl.groobaz.entities.FlyingObject.FlyingObjectType;
 import pl.groobaz.entities.Player;
 import pl.groobaz.game.JavaDevMattClikerGame;
 import pl.groobaz.screen.ui.IClickCallback;
@@ -37,7 +38,7 @@ public class GamePlayScreen extends AbstractScreen {
 	}
 
 	private void initFlyingObjects() {
-		flyingObject1 = new FlyingObject(FlyingObject.MONEY);
+		flyingObject1 = new FlyingObject(FlyingObjectType.MONEY, game);
 		stage.addActor(flyingObject1);
 		flyingObject1.flyLikeHell();
 	}
