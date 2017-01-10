@@ -1,11 +1,13 @@
 package pl.groobaz.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.sun.xml.internal.ws.assembler.dev.TubelineAssemblyContextUpdater;
 
 import pl.groobaz.game.JavaDevMattClikerGame;
 
@@ -18,11 +20,14 @@ public class FlyingObject extends Image {
 	public final static String MONEY = "money.png";
 	public final static String BOOKS = "books.png";
 
-	private final static int WIDTH = 150;
-	private final static int HEIGHT = 150;
+	private final static int WIDTH = 80;
+	private final static int HEIGHT = 80;
 
-	private final static int STARTING_X = 0;
+	private final static int STARTING_X_1 = 0;
+	private final static int STARTING_X_2 = JavaDevMattClikerGame.WIDTH;
 	private final static int STARTING_Y = -100; // startuje poza ekranem;
+	private int startingX;
+	
 	private JavaDevMattClikerGame game;
 
 	private FlyingObjectType type;
@@ -35,7 +40,8 @@ public class FlyingObject extends Image {
 		this.setSize(WIDTH, HEIGHT);
 
 		// starting position
-		this.setPosition(STARTING_X, STARTING_Y);
+		startingX = MathUtils.randomBoolean() ? STARTING_X_1 : STARTING_X_2;
+		this.setPosition(startingX, STARTING_Y);
 
 		this.addListener(new ClickListener() {
 			@Override
@@ -69,8 +75,14 @@ public class FlyingObject extends Image {
 	}
 
 	public void flyLikeHell() {
-		Action a = Actions.parallel(Actions.moveBy(300, 200, 5), Actions.rotateBy(360, 5));
-		Action b = Actions.parallel(Actions.moveBy(-500, 900, 3), Actions.rotateBy(360, 3));
+		
+		int xSign = (startingX == STARTING_X_1)? 1 : -1;
+		int time1 = MathUtils.random(1,4);
+		int time2 = MathUtils.random(1,4);
+		int randomYEffect = MathUtils.random(-100,500);
+		
+		Action a = Actions.parallel(Actions.moveBy(xSign * 300 + (MathUtils.random(-200,200)), 200 + randomYEffect, time1), Actions.rotateBy(360, time1));
+		Action b = Actions.parallel(Actions.moveBy(xSign * -500, 900, time2), Actions.rotateBy(360, time2));
 		Action c = Actions.run(new Runnable() {
 			@Override
 			public void run() {
